@@ -1,3 +1,7 @@
+run:
+	@cargo build --release
+	@target/release/rust-1brc
+
 test:
 	@cargo test
 
