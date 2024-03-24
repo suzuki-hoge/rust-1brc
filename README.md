@@ -28,6 +28,7 @@ $ mv measurements.txt path/to/your-project/data/10000.txt
 |-----------------------------|-------------|---------------|
 | first implement             | 17.223 sec  | 1.335 sec     |
 | use hashbrown and entry_ref | 15.272 sec  | 0.955 sec     |
+| split by find               | 11.902 sec  | 0.756 sec     |
 
 #### 1000000000 records
 
@@ -35,3 +36,4 @@ $ mv measurements.txt path/to/your-project/data/10000.txt
 |-----------------------------|---------------|
 | first implement             | 120.311 sec   |
 | use hashbrown and entry_ref | 96.936 sec    |
+| split by find               | 76.295 sec    |

@@ -51,8 +51,8 @@ fn main() -> Result<(), Box<dyn Error>> {
 }
 
 fn split(s: &str) -> (&str, &str) {
-    let ss = s.split(';').collect::<Vec<_>>();
-    (ss[0], ss[1])
+    let i = s.find(';').unwrap();
+    (&s[0..i], &s[i + 1..s.len()])
 }
 
 fn parse(s: &str) -> i64 {
