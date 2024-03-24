@@ -56,5 +56,25 @@ fn split(s: &str) -> (&str, &str) {
 }
 
 fn parse(s: &str) -> i64 {
-    (s.parse::<f64>().unwrap() * 10.0) as i64
+    let mut f = 1;
+    let n = s.as_bytes().iter().fold(0_i64, |acc, c| match c {
+        b'-' => {
+            f = -1;
+            acc
+        }
+        b'.' => acc,
+        _ => acc * 10 + ((*c - b'0') as i64),
+    });
+    f * n
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::parse;
+
+    #[test]
+    fn test_parse() {
+        assert_eq!(parse("12.3"), 123);
+        assert_eq!(parse("-12.3"), -123);
+    }
 }
