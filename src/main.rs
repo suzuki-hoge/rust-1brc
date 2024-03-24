@@ -51,7 +51,7 @@ fn main() -> Result<(), Box<dyn Error>> {
 }
 
 fn split(s: &str) -> (&str, &str) {
-    let i = s.find(';').unwrap();
+    let i = s.rfind(';').unwrap();
     (&s[0..i], &s[i + 1..s.len()])
 }
 
