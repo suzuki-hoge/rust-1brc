@@ -1,10 +1,10 @@
 use std::cmp::{max, min};
-use std::collections::HashMap;
 use std::error::Error;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 
 use chrono::Local;
+use hashbrown::HashMap;
 use itertools::Itertools;
 
 type City = String;
@@ -17,7 +17,7 @@ type Data = (Total, Count, Min, Max);
 fn main() -> Result<(), Box<dyn Error>> {
     let s = Local::now();
 
-    let mut map: HashMap<City, Data> = HashMap::new();
+    let mut map: HashMap<City, Data> = HashMap::with_capacity(1024);
 
     let total = 10000000;
     let mut i = 0;
@@ -26,9 +26,9 @@ fn main() -> Result<(), Box<dyn Error>> {
         let line = line?;
 
         let sp: Vec<&str> = line.split(';').collect();
-        let city = sp[0].to_string();
+        let city = sp[0];
         let n = (sp[1].parse::<f64>().unwrap() * 10.0) as i64;
-        let e = map.entry(city).or_insert((0, 0, 999, -999));
+        let e = map.entry_ref(city).or_insert((0, 0, 999, -999));
         let (a, b, c, d) = *e;
         *e = (a + n, b + 1, min(c, n), max(d, n));
 
