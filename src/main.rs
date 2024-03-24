@@ -25,9 +25,8 @@ fn main() -> Result<(), Box<dyn Error>> {
     for line in BufReader::new(File::open(format!("data/{total}.txt"))?).lines() {
         let line = line?;
 
-        let sp: Vec<&str> = line.split(';').collect();
-        let city = sp[0];
-        let n = (sp[1].parse::<f64>().unwrap() * 10.0) as i64;
+        let (city, s2) = split(&line);
+        let n = parse(s2);
         let e = map.entry_ref(city).or_insert((0, 0, 999, -999));
         let (a, b, c, d) = *e;
         *e = (a + n, b + 1, min(c, n), max(d, n));
@@ -49,4 +48,13 @@ fn main() -> Result<(), Box<dyn Error>> {
     println!("{:?}", e - s);
 
     Ok(())
+}
+
+fn split(s: &str) -> (&str, &str) {
+    let ss = s.split(';').collect::<Vec<_>>();
+    (ss[0], ss[1])
+}
+
+fn parse(s: &str) -> i64 {
+    (s.parse::<f64>().unwrap() * 10.0) as i64
 }
