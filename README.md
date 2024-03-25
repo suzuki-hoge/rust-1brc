@@ -27,7 +27,7 @@ $ mv measurements.txt path/to/your-project/data/10000.txt
 |                 | debug build | release build |
 |-----------------|-------------|---------------|
 | first implement | 17.223 sec  | 1.335 sec     |
-| best            |             | 0.632 sec     |
+| best            |             | 0.589 sec     |
 
 #### 1000000000 records
 
@@ -38,3 +38,4 @@ $ mv measurements.txt path/to/your-project/data/10000.txt
 | split by find               | 76.295 sec    |
 | split by rfind              | 68.482 sec    |
 | parse by fold               | 61.680 sec    |
+| strip number bytes          | 60.364 sec    |
